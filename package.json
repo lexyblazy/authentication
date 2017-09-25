@@ -1,0 +1,33 @@
+{
+  "name": "authentication",
+  "version": "1.0.0",
+  "description": "an authentication boilerplate for node-express-passport",
+  "main": "app.js",
+  "engines": {
+    "node": "7.7.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lexyblazy/authentication.git"
+  },
+  "author": "lexy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lexyblazy/authentication/issues"
+  },
+  "homepage": "https://github.com/lexyblazy/authentication#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "mongoose": "^4.11.5",
+    "morgan": "^1.8.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0",
+    "pug": "^2.0.0-rc.2"
+  }
+}
