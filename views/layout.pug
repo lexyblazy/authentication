@@ -1,0 +1,52 @@
+doctype html
+head
+	title= `${title}`
+	meta(name="viewport" content="width=device-width, initial-scale=1")
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+body
+	block header
+		nav.navbar.navbar-inverse
+			.container-fluid
+				// Brand and toggle get grouped for better mobile display
+				.navbar-header
+					button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href='/') Authentication
+				// Collect the nav links, forms, and other content for toggling
+				#bs-example-navbar-collapse-1.collapse.navbar-collapse
+					ul.nav.navbar-nav
+						li
+							a(href='/secret')
+								| Secret
+								span.sr-only (current)
+					ul.nav.navbar-nav.navbar-right
+						if(!user)
+							li
+								a(href='/login') Login
+							li
+								a(href='/register') Register
+						if(user)
+							li
+								a(href="/logout") Logout
+	
+	block messages
+		.container
+			if(errors)
+				each e in errors
+					.alert.alert-danger
+						p= e 
+							a.close() &times;
+			if(success)
+				each s in success
+					.alert.alert-success
+						p= s
+							a.close() &times;
+	block content
+
+	block footer
