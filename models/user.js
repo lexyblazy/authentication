@@ -6,7 +6,6 @@ mongoose.Promise = global.Promise //tell mongoose to use ES6 promises
 const userSchema = new mongoose.Schema({
     email:{
         type:String,
-        validate:[validator.isEmail,'Invalid email address'],
         required:"You must supply an email",
         trim:true,
         unique:"A user with that email already exists"
@@ -15,7 +14,9 @@ const userSchema = new mongoose.Schema({
         type:String,
         trim:true,
         required:"You must supply your name"
-    }
+    },
+    resetPasswordToken:String,
+    resetPasswordExpires:Date
 })
 
 userSchema.plugin(mongooseErrors);

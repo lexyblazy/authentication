@@ -15,4 +15,14 @@ block content
 						input.btn.btn-success(type='submit' value='Login')
 					small Need an Account? 
 						a(href="/register") Register
+		.row
+			.col-md-6.col-md-offset-3
+				h2 I FORGOT MY PASSWORD
+				form(action="/accounts/forgot" method='post')
+					.form-group
+						label Email
+						input.form-control(type="email" placeholder='example@example.com' name='email')
+					.form-group
+						input.btn.btn-block.btn-success(type="submit" value='SEND ME A PASSWORD RESET')
+						
 				
