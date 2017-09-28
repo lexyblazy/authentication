@@ -2,6 +2,7 @@ const User = require('../models/user');
 const promisify = require('es6-promisify');
 const passport = require('passport');
 const crypto = require('crypto');
+const mail = require('../handlers/mail')
 
 //show the register form
 exports.registerForm = (req,res)=>{
@@ -148,9 +149,16 @@ exports.forgotForm = async (req,res)=>{
     user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
     user.resetPasswordExpires = Date.now() + (60*60*1000);
     await user.save();
-    req.flash('success',`this your password reset token ${req.headers.host}/accounts/forgot/${user.resetPasswordToken}`)
+    const resetURL = `${req.headers.host}/accounts/forgot/${user.resetPasswordToken}`;
+    const options = {
+        user,
+        subject:"Password Link for your account"
+    }
+    await mail.send(options)
+    req.flash('success',`Password reset token has been sent to your email`)
     res.redirect('back'); 
 }
+
 exports.validateToken = async (req,res,next)=>{
     const token = req.params.token;
     const user = await User.findOne({

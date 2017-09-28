@@ -46,7 +46,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 require('./handlers/passport');
-
+require('./handlers/mail');
 app.use((req,res,next)=>{
     res.locals.user = req.user || null
     res.locals.errors = req.flash('error');
@@ -58,6 +58,6 @@ app.use((req,res,next)=>{
 //ROUTES
 app.use(routes)
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("Server is up and running ")
 })
