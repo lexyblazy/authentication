@@ -152,7 +152,9 @@ exports.forgotForm = async (req,res)=>{
     const resetURL = `${req.headers.host}/accounts/forgot/${user.resetPasswordToken}`;
     const options = {
         user,
-        subject:"Password Link for your account"
+        subject:"Password Link for your account",
+        resetURL,
+        fileName:"password-reset"
     }
     await mail.send(options)
     req.flash('success',`Password reset token has been sent to your email`)

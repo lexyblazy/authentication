@@ -15,13 +15,21 @@ const transport = nodemailer.createTransport({
   }
 });
 
+const generateHTML = ( fileName,options={} )=>{
+  const html = pug.renderFile(`${__dirname}/../views/email/${fileName}.pug`,options);
+  const inlined = juice(html)
+  return inlined;
+}
+
 exports.send = async (options)=>{
+    const html = generateHTML(options.fileName,options);
+    const text = htmlToText.fromString(html);
     const mailOptions = {
       from :"noreply@Authentication.com",
       to : options.user.email,
       subject:options.subject,
-      text:"This will be filled in later",
-      html:"This will be filled in later"
+      text,
+      html
     }
     const sendMail = promisify(transport.sendMail,transport);
     return sendMail(mailOptions);
